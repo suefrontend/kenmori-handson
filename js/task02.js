@@ -12,8 +12,10 @@ const link = document.createElement('a');
 link.setAttribute("href", "1.html")
 link.innerHTML = "これです"
 
-ul_1.appendChild(image);
-ul_2.appendChild(link);
-ul_3.appendChild(li);
+// ul_1.appendChild(image);
+// ul_2.appendChild(link);
+// ul_3.appendChild(li);
+
+ul_1.appendChild(li).appendChild(link).appendChild(image);
 
 //li > a > img > text
