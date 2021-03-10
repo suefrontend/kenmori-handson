@@ -9,7 +9,7 @@ image.src = "bookmark.png";
 image.setAttribute('alt', 'ブックマーク')
 
 const link = document.createElement('a');
-link.setAttribute("href", "1.html")
+link.href = "1.html";
 link.innerHTML = "これです"
 
 // ul_1.appendChild(image);
