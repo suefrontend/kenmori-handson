@@ -1,4 +1,4 @@
-const ul = document.querySelector('.lists');
+const ul = document.querySelector('#lists');
 
 const li = document.createElement('li');
 
