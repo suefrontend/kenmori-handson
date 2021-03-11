@@ -9,11 +9,16 @@ const promise = new Promise((resolve,reject) => {
 
 });
 
-const ul = document.querySelector('.list');
+const ul = document.querySelector('#lists');
 
 promise.then(response => {
-  response.map(el => {
-    let str = `<li><a href="${el.to}"><img src="${el.img}" alt="${el.alt}">${el.text}</a></li>`;
-    ul.insertAdjacentHTML('afterbegin', str);
+
+  response.map(data => {
+
+    const {to, img, alt, text} = data;
+
+    const markup = `<li><a href="${to}"><img src="${img}" alt="${alt}">${text}</a></li>`;
+    ul.insertAdjacentHTML('afterbegin', markup);
   })
+
 })
