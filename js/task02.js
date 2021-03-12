@@ -4,7 +4,7 @@ const li = document.createElement('li');
 
 const image = document.createElement('img');
 image.src = "bookmark.png";
-image.setAttribute('alt', 'ブックマーク')
+image.alt = 'ブックマーク';
 
 const link = document.createElement('a');
 link.href = "1.html";
