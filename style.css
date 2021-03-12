@@ -11,6 +11,9 @@ h1 {
 	line-height: 0.8;
 	color: #31be9a;
 }
+h1.task_title {
+	line-height: 1.2;
+}
 h1 span {
 	font-size: 40%;
 	font-weight: 100;
@@ -28,6 +31,10 @@ a {
 }
 a:hover {
 	opacity: 0.7;
+}
+pre {
+	background: #fff;
+	padding: 5px;
 }
 .main {
 	margin-top: 80px;
