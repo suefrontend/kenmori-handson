@@ -13,6 +13,8 @@ const ul = document.querySelector('#lists');
 
 promise.then(response => {
 
+  console.log("response", response)
+
   response.map(data => {
 
     const {to, img, alt, text} = data;
