@@ -8,6 +8,6 @@ image.setAttribute('alt', 'ブックマーク')
 
 const link = document.createElement('a');
 link.href = "1.html";
-link.innerHTML = "これです"
+link.innerHTML = "これです";
 
 ul.appendChild(li).appendChild(link).appendChild(image);
