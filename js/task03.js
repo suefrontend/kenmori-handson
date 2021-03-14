@@ -1,17 +1,27 @@
-const item1 = {};
-item1.href = "a1.html";
-item1.src = "/img/bookmark.png";
-item1.text = "a1";
-
-const item2 = {};
-item2.href = "a2.html";
-item2.src = "/img/bookmark.png";
-item2.text = "a2";
+const data = [
+  {
+    href: "a1.html",
+    src: "/img/bookmark.png",
+    text: "a1"
+  },
+  {
+    href: "a2.html",
+    src:"/img/bookmark.png",
+    text: "a2"
+  }
+]
 
 const ul = document.querySelector('#lists');
 
-const markup = `
-  <li><a href=${item1.href}><img src=${item1.src}>${item1.text}</a></li>
-  <li><a href=${item2.href}><img src=${item2.src}>${item2.text}</a></li>
-`;
-ul.innerHTML = markup;
+const arr = [];
+
+// 関数を作り、動的にhtmlを作成する
+data.forEach(item => {
+  arr.push(`<li><a href=${item.href}><img src=${item.src}>${item.text}</a></li>`);
+})
+
+const html = arr.reduce((prev, current) => {
+  return prev + current;
+});
+
+ul.innerHTML = html;
