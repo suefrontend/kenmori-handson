@@ -14,7 +14,7 @@ const data = [
 const ul = document.querySelector('#lists');
 
 const template = data.reduce((prev, current) => {
-  return [...prev, `<li><a href=${current.href}><img src=${current.src}>${current.text}</a></li>`].join('');
-}, [])
+  return `${prev}<li><a href=${current.href}><img src=${current.src}>${current.text}</a></li>`;
+}, "")
 
 ul.innerHTML = template;
