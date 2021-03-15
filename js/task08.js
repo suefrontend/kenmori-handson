@@ -9,10 +9,10 @@ const ul = document.querySelector('#lists');
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
-const promise = new Promise((resolve,reject) => {
+ //loading画像
+ ul.appendChild(loader);
 
-  //loading画像
-    ul.appendChild(loader);
+const promise = new Promise((resolve,reject) => {
 
     // いままでresolveとしていたところでrejectを実行
     //3秒後にrejectを実行
@@ -24,6 +24,6 @@ const promise = new Promise((resolve,reject) => {
 
 //thenでその値をコンソール出力してください
 // エラーを起こしてcatchでエラーをキャッチ
-promise.then().catch((error) => {
+promise.catch((error) => {
   console.log("エラーが起こりました", error);
 })

@@ -9,22 +9,23 @@ const ul = document.querySelector('#lists');
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
+//resolveになるまでの間にloading画像を出す
+ul.appendChild(loader);
+
 const promise = new Promise((resolve,reject) => {
 
-  //resolveになるまでの間にloading画像を出す
-    ul.appendChild(loader);
-
     setTimeout(() => {
-      //終わったら除く
-      ul.removeChild(loader);
       resolve(data);
     }, 3000)
 
 });
 
 promise.then(response => {
+
+  //終わったら除く
+  ul.removeChild(loader);
+
   response.map(data => {
-    const {to, img, alt, text} = data;
     const markup = `<li><a href="${to}"><img src="${img}" alt="${alt}">${text}</a></li>`;
     ul.insertAdjacentHTML('afterbegin', markup);
   })
