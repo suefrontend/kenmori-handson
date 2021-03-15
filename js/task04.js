@@ -1,4 +1,4 @@
-const ul = document.querySelector('.list');
+const ul = document.querySelector('#lists');
 
 const data = [
   {to: "bookmark.html", img: "1.png", alt:"画像1", text: "ブックマーク"},
