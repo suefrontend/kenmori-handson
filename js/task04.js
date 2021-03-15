@@ -5,8 +5,8 @@ const data = [
   {to: "message.html", img: "2.png", alt:"画像2", text: "メッセージ"}
 ];
 
-const str = data.map(el => {
-  return `<li><a href=${el.to}><img src=${el.img} alt=${el.alt}>${el.text}</a></li>`
-}).join('');
+const markup = data.reduce((prev, current)=> {
+  return `${prev}<li><a href=${current.to}><img src=${current.img} alt=${current.alt}>${current.text}</a></li>`
+}, "")
 
-ul.innerHTML = str;
+ul.innerHTML = markup;
