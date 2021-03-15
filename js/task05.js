@@ -13,14 +13,10 @@ const ul = document.querySelector('#lists');
 
 promise.then(response => {
 
-  const arr = [];
+  const markup = response.reduce((prev, current) => {
+    return (`${prev}<li><a href="${current.to}"><img src="${current.img}" alt="${current.alt}">${current.text}</a></li>`);
+  }, "")
 
-  response.forEach(data => {
+  ul.innerHTML = markup;
 
-    const {to, img, alt, text} = data;
-    arr.push(`<li><a href="${to}"><img src="${img}" alt="${alt}">${text}</a></li>`);
-
-  })
-
-  ul.insertAdjacentHTML('afterbegin', arr.join(''));
 })
