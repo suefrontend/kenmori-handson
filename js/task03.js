@@ -13,15 +13,8 @@ const data = [
 
 const ul = document.querySelector('#lists');
 
-const arr = [];
+const template = data.reduce((prev, current) => {
+  return [...prev, `<li><a href=${current.href}><img src=${current.src}>${current.text}</a></li>`].join('');
+}, [])
 
-// 関数を作り、動的にhtmlを作成する
-data.forEach(item => {
-  arr.push(`<li><a href=${item.href}><img src=${item.src}>${item.text}</a></li>`);
-})
-
-const html = arr.reduce((prev, current) => {
-  return prev + current;
-});
-
-ul.innerHTML = html;
+ul.innerHTML = template;
