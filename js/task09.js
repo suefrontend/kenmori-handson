@@ -3,7 +3,7 @@ const data = [
   {to: "message.html", img: "2.png", alt:"画像2", text: "メッセージ"}
 ]
 
-const ul = document.querySelector('#lists');
+const ul = document.getElementById('lists');
 
 // loader画像
 const loader = document.createElement('img');
@@ -12,7 +12,7 @@ loader.src = "./img/loading-circle.gif";
 //resolveになるまでの間にloading画像を出す
 ul.appendChild(loader);
 
-function promise() {
+function fetchData() {
 
   return new Promise((resolve,reject) => {
     setTimeout(() => {
@@ -22,9 +22,9 @@ function promise() {
 
 }
 
-async function load() {
+async function loadData() {
 
-  await promise(data);
+  await fetchData(data);
 
   //終わったら除く
   ul.removeChild(loader);
@@ -36,4 +36,4 @@ async function load() {
 
 }
 
-load();
+loadData();
