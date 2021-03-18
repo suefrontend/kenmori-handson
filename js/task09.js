@@ -22,7 +22,7 @@ function fetchData() {
 
 }
 
-async function loadData() {
+async function renderData() {
 
   await fetchData(data);
 
@@ -36,4 +36,4 @@ async function loadData() {
 
 }
 
-loadData();
+renderData();
