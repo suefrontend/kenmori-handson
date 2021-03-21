@@ -4,9 +4,6 @@ const ul = document.querySelector('#lists');
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
-//resolveになるまでの間にloading画像を出す
-ul.appendChild(loader);
-
 function fetchData() {
 
   return new Promise((resolve,reject) => {
@@ -21,6 +18,9 @@ function fetchData() {
 }
 
 async function renderData() {
+
+//resolveになるまでの間にloading画像を出す
+ul.appendChild(loader);
 
   try {
 
