@@ -4,19 +4,13 @@ const ul = document.querySelector('#lists');
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
-async function fetchData() {
-  const response = await fetch('https://jsondata.okiba.me/v1/json/zPMMU210321111158')
-  return await response.json();
-}
-
-function timerForFetchingData() {
+function fetchData() {
   return new Promise((resolve, reject) => {
     setTimeout(function() {
-      resolve(fetchData());
+      resolve(fetch('https://jsondata.okiba.me/v1/json/zPMMU210321111158'));
     }, 3000)
   })
 }
-
 
 async function renderData() {
 
@@ -27,7 +21,8 @@ async function renderData() {
   ul.appendChild(loader);
 
   try {
-    data = await timerForFetchingData();
+    const response = await fetchData();
+    data = await response.json();
   }
   catch(error) {
     console.log(error);
