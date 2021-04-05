@@ -1,5 +1,6 @@
 const ul = document.getElementById('lists');
 let modalBtn = document.getElementById("modal-btn")
+let fetchBtn = document.getElementById("fetch-btn")
 let modal = document.querySelector(".modal")
 let closeBtn = document.querySelector(".close-btn")
 
@@ -7,11 +8,16 @@ let closeBtn = document.querySelector(".close-btn")
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
+//クリックしたらモーダルが出てきて、
+//モーダルの中に「データを表示する」ボタンを作り、
+//それを押したらモーダルは消えて、リストが出てくる
+
+
 function fetchData() {
   return new Promise((resolve, reject) => {
-    setTimeout(function() {
-      resolve(fetch('https://jsondata.okiba.me/v1/json/ARA1Z210401070524'));
-    }, 3000)
+
+    resolve(fetch('https://jsondata.okiba.me/v1/json/ARA1Z210401070524'));
+
   })
 }
 
@@ -20,10 +26,7 @@ async function renderData() {
   // fetchDataで取得したデータを入れる変数
   let data;
 
-  //loading画像を出す
-  if(!data) {
-    ul.appendChild(loader);
-  }
+  ul.appendChild(loader);
 
   try {
     const response = await fetchData();
@@ -33,9 +36,7 @@ async function renderData() {
     console.log(error);
   }
   finally {
-    if(data) {
       ul.removeChild(loader);
-    }
   }
 
   const markup = data.reduce((prev, current) => {
@@ -45,17 +46,22 @@ async function renderData() {
 }
 
 modalBtn.addEventListener('click', function() {
-  modal.style.display = "block"
+  // 前回fetchしたデータが表示されていた部分を空にする
+  ul.innerHTML = "";
+  modal.style.display = "block";
+})
+
+fetchBtn.addEventListener('click', function() {
   renderData();
+  modal.style.display = "none";
 });
 
 closeBtn.addEventListener("click", function() {
-  modal.style.display = "none"
+  modal.style.display = "none";
 });
 
 document.addEventListener('click', function(e) {
-  console.log("e", e)
   if(e.target == modal){
-    modal.style.display = "none"
+    modal.style.display = "none";
   }
 })
