@@ -61,7 +61,7 @@ closeBtn.addEventListener("click", function() {
 });
 
 document.addEventListener('click', function(e) {
-  if(e.target == modal){
+  if(e.target === modal){
     modal.style.display = "none";
   }
 })
