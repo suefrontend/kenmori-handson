@@ -1,9 +1,9 @@
 const ul = document.getElementById('lists');
-let modalBtn = document.getElementById("modal-btn")
-let fetchBtn = document.getElementById("fetch-btn")
-let modal = document.querySelector(".modal")
-let closeBtn = document.querySelector(".close-btn")
-let input = document.getElementById("input");
+const modalBtn = document.getElementById("modal-btn")
+const fetchBtn = document.getElementById("fetch-btn")
+const modal = document.querySelector(".modal")
+const closeBtn = document.querySelector(".close-btn")
+const input = document.getElementById("input");
 
 // loader画像
 const loader = document.createElement('img');
@@ -61,13 +61,11 @@ fetchBtn.addEventListener('click', function() {
 });
 
 closeBtn.addEventListener("click", function() {
-  input.value = "";
   modal.style.display = "none";
 });
 
 document.addEventListener('click', function(e) {
   if(e.target === modal){
-    input.value = "";
     modal.style.display = "none";
   }
 })
