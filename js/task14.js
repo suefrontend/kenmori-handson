@@ -49,6 +49,8 @@ async function renderData() {
 modalBtn.addEventListener('click', function() {
   // 前回fetchしたデータが表示されていた部分を空にする
   ul.innerHTML = "";
+  // 前回inputに入れた数字を空にする
+  input.value = "";
   modal.style.display = "block";
 })
 
