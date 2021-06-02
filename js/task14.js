@@ -3,7 +3,7 @@ let modalBtn = document.getElementById("modal-btn")
 let fetchBtn = document.getElementById("fetch-btn")
 let modal = document.querySelector(".modal")
 let closeBtn = document.querySelector(".close-btn")
-let inputValue = document.getElementById("input");
+let input = document.getElementById("input");
 
 // loader画像
 const loader = document.createElement('img');
@@ -53,19 +53,19 @@ modalBtn.addEventListener('click', function() {
 })
 
 fetchBtn.addEventListener('click', function() {
-  console.log("inputValue", inputValue.value);
+  console.log("input value", input.value);
   renderData();
   modal.style.display = "none";
 });
 
 closeBtn.addEventListener("click", function() {
-  inputValue.value = "";
+  input.value = "";
   modal.style.display = "none";
 });
 
 document.addEventListener('click', function(e) {
   if(e.target === modal){
-    inputValue.value = "";
+    input.value = "";
     modal.style.display = "none";
   }
 })
