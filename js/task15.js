@@ -1,0 +1,74 @@
+const ul = document.getElementById('lists');
+const modalBtn = document.getElementById("modal-btn");
+const modal = document.querySelector(".modal");
+const closeBtn = document.querySelector(".close-btn");
+const numberInput = document.getElementById("number_input");
+const nameInput = document.getElementById("name_input");
+const requestForm = document.getElementById('api_request_form');
+
+// loader画像
+const loader = document.createElement('img');
+loader.src = "./img/loading-circle.gif";
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+
+    resolve(fetch('https://jsondata.okiba.me/v1/json/ARA1Z210401070524'));
+
+  })
+}
+
+async function renderData() {
+
+  // fetchDataで取得したデータを入れる変数
+  let data;
+
+  ul.appendChild(loader);
+
+  try {
+    const response = await fetchData();
+    data = await response.json();
+  }
+  catch(error) {
+    console.log(error);
+  }
+  finally {
+      ul.removeChild(loader);
+  }
+
+  const markup = data.reduce((prev, current) => {
+    return `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`;
+  }, "")
+  ul.innerHTML = markup;
+}
+
+modalBtn.addEventListener('click', function() {
+  // 前回fetchしたデータが表示されていた部分を空にする
+  ul.innerHTML = "";
+
+  // 前回inputに入れた数字を空にする
+  numberInput.value = "";
+
+  // 前回inputに入れた名前を空にする
+  nameInput.value = "";
+
+  modal.style.display = "block";
+})
+
+requestForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  console.log("input number", numberInput.value);
+  console.log("input value", nameInput.value);
+  renderData();
+  modal.style.display = "none";
+});
+
+closeBtn.addEventListener("click", function() {
+  modal.style.display = "none";
+});
+
+document.addEventListener('click', function(e) {
+  if(e.target === modal){
+    modal.style.display = "none";
+  }
+})
