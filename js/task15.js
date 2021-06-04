@@ -27,20 +27,28 @@ async function renderData() {
 
   try {
     const response = await fetchData();
-    data = await response.json();
+    return await response.json();
   }
   catch(error) {
     console.log(error);
   }
   finally {
-      ul.removeChild(loader);
+    console.log("finally")
+    ul.removeChild(loader);
   }
-
-  createMarkup(data);
 }
 
 function createMarkup(data) {
-  ul.innerHTML = data.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
+  const markup = data.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
+  return markup;
+}
+
+function getTemplate() {
+  renderData().then(data => {
+    const template = createMarkup(res);
+    ul.innerHTML = template;
+  })
+
 }
 
 modalBtn.addEventListener('click', function() {
@@ -61,6 +69,7 @@ requestForm.addEventListener('submit', function(e) {
   console.log(`input number, ${numberInput.value}`);
   console.log(`input value, ${nameInput.value}`);
   renderData();
+  getTemplate();
   modal.style.display = "none";
 });
 
