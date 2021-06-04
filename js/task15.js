@@ -36,10 +36,11 @@ async function renderData() {
       ul.removeChild(loader);
   }
 
-  const markup = data.reduce((prev, current) => {
-    return `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`;
-  }, "")
-  ul.innerHTML = markup;
+  createMarkup(data);
+}
+
+function createMarkup(data) {
+  ul.innerHTML = data.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
 }
 
 modalBtn.addEventListener('click', function() {
@@ -57,8 +58,8 @@ modalBtn.addEventListener('click', function() {
 
 requestForm.addEventListener('submit', function(e) {
   e.preventDefault();
-  console.log("input number", numberInput.value);
-  console.log("input value", nameInput.value);
+  console.log(`input number, ${numberInput.value}`);
+  console.log(`input value, ${nameInput.value}`);
   renderData();
   modal.style.display = "none";
 });
