@@ -45,7 +45,7 @@ function createMarkup(data) {
 
 function getTemplate() {
   renderData().then(data => {
-    const template = createMarkup(res);
+    const template = createMarkup(data);
     ul.innerHTML = template;
   })
 
