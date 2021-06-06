@@ -18,10 +18,7 @@ function fetchData() {
   })
 }
 
-async function renderData() {
-
-  // fetchDataで取得したデータを入れる変数
-  let data;
+async function returnFetchedData() {
 
   ul.appendChild(loader);
 
@@ -38,9 +35,8 @@ async function renderData() {
   }
 }
 
-const markup = async data => {
-  const json = await data;
-  const createNode = json.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
+const addDataToInnerHTML = data => {
+  const createNode = data.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
   ul.innerHTML = createNode;
 }
 
@@ -57,12 +53,12 @@ modalBtn.addEventListener('click', function() {
   modal.style.display = "block";
 })
 
-requestForm.addEventListener('submit', function(e) {
+requestForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   console.log(`input number, ${numberInput.value}`);
   console.log(`input value, ${nameInput.value}`);
-  renderData();
-  markup();
+  const data = await returnFetchedData();
+  addDataToInnerHTML(data);
   modal.style.display = "none";
 });
 
