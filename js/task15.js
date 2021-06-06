@@ -38,17 +38,10 @@ async function renderData() {
   }
 }
 
-function createMarkup(data) {
-  const markup = data.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
-  return markup;
-}
-
-function getTemplate() {
-  renderData().then(data => {
-    const template = createMarkup(data);
-    ul.innerHTML = template;
-  })
-
+const markup = async data => {
+  const json = await data;
+  const createNode = json.reduce((prev, current) => `${prev}<li>${current.id} - ${current.name} - ${current.tel}</li>`, "");
+  ul.innerHTML = createNode;
 }
 
 modalBtn.addEventListener('click', function() {
@@ -69,7 +62,7 @@ requestForm.addEventListener('submit', function(e) {
   console.log(`input number, ${numberInput.value}`);
   console.log(`input value, ${nameInput.value}`);
   renderData();
-  getTemplate();
+  markup();
   modal.style.display = "none";
 });
 
