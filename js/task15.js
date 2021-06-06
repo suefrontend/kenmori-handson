@@ -18,7 +18,7 @@ function fetchData() {
   })
 }
 
-async function returnFetchedData() {
+async function getFetchedData() {
 
   ul.appendChild(loader);
 
@@ -57,7 +57,7 @@ requestForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   console.log(`input number, ${numberInput.value}`);
   console.log(`input value, ${nameInput.value}`);
-  const data = await returnFetchedData();
+  const data = await getFetchedData();
   addDataToInnerHTML(data);
   modal.style.display = "none";
 });
