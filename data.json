@@ -3,7 +3,7 @@
     "category": "news",
     "title": "ニュース #1",
     "published": "2021-05-08",
-    "image": "src/image.jpg",
+    "image": "src/oli.jpg",
     "comment": 0
   },
   {
@@ -31,7 +31,7 @@
     "category": "economy",
     "title": "経済 #1",
     "published": "2021-02-08",
-    "image": "src/image.jpg",
+    "image": "src/economy.jpg",
     "comment": 0
   },
   {
