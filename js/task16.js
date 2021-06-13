@@ -56,9 +56,15 @@ const addDataToInnerHTML = (res, index) => {
 
     const data = res.data;
 
+    const catImage = document.createElement('img');
+
+
     data.map(item => {
 
       if(item.selected) {
+
+        catImage.src = './img/' + item.category + '.jpg';
+
         const titles = item.articles.map(article => {
 
           const li = document.createElement('li');
@@ -85,7 +91,8 @@ const addDataToInnerHTML = (res, index) => {
             li.appendChild(comment);
           }
 
-          fragment.appendChild(li)
+          fragment.appendChild(li);
+          fragment.appendChild(catImage);
 
           ul.appendChild(fragment)
         })
@@ -97,6 +104,9 @@ const addDataToInnerHTML = (res, index) => {
 const renderSelectedCategory = (res, index) => {
 
   const data = res.data[index];
+
+  const catImage = document.createElement('img');
+  catImage.src = './img/' + data.category + '.jpg';
 
   const articles = data.articles;
 
@@ -125,9 +135,10 @@ const renderSelectedCategory = (res, index) => {
       li.appendChild(comment);
     }
 
-    fragment.appendChild(li)
+    fragment.appendChild(li);
+    fragment.appendChild(catImage);
 
-    ul.appendChild(fragment)
+    ul.appendChild(fragment);
     })
 }
 
