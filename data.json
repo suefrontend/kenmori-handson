@@ -1,58 +1,29 @@
-[
-  {
-    "category": "news",
-    "title": "ニュース #1",
-    "published": "2021-05-08",
-    "image": "src/oli.jpg",
-    "comment": 0
-  },
-  {
-    "category": "news",
-    "title": "ニュース #2",
-    "published": "2021-06-08",
-    "image": "src/image.jpg",
-    "comment": 2
-  },
-  {
-    "category": "news",
-    "title": "ニュース #3",
-    "published": "2021-06-08",
-    "image": "src/image.jpg",
-    "comment": 1
-  },
-  {
-    "category": "news",
-    "title": "ニュース #4",
-    "published": "2021-05-08",
-    "image": "src/image.jpg",
-    "comment": 0
-  },
-  {
-    "category": "economy",
-    "title": "経済 #1",
-    "published": "2021-02-08",
-    "image": "src/economy.jpg",
-    "comment": 0
-  },
-  {
-    "category": "economy",
-    "title": "経済 #2",
-    "published": "2021-06-08",
-    "image": "src/image.jpg",
-    "comment": 1
-  },
-  {
-    "category": "economy",
-    "title": "経済 #3",
-    "published": "2021-03-08",
-    "image": "src/image.jpg",
-    "comment": 0
-  },
-  {
-    "category": "economy",
-    "title": "経済 #4",
-    "published": "2021-06-08",
-    "image": "src/image.jpg",
-    "comment": 1
-  }
-]
+{
+  "data": [
+    {
+      "id": 1,
+      "category": "news",
+      "label": "ニュース",
+      "selected": true,
+      "articles": [
+        {"title": "ニュース #1", "published": "2021-05-08", "comment": 0, "link": "news/01.html"},
+        {"title": "ニュース #2", "published": "2021-06-08", "comment": 2, "link": "news/02.html"},
+        {"title": "ニュース #3", "published": "2021-06-08", "comment": 1, "link": "news/03.html"},
+        {"title": "ニュース #4", "published": "2021-05-08", "comment": 0, "link": "news/04.html"}
+      ],
+      "thumbnail": "src/oli.jpg"
+    },
+    {
+      "id": 2,
+      "category": "economy",
+      "label": "経済",
+      "selected": false,
+      "articles": [
+        {"title": "経済 #1", "published": "2021-02-08", "comment": 0, "link": "economy/01.html"},
+        {"title": "経済 #2", "published": "2021-06-08", "comment": 1, "link": "economy/02.html"},
+        {"title": "経済 #3", "published": "2021-03-08", "comment": 0, "link": "economy/03.html"},
+        {"title": "経済 #4", "published": "2021-06-08", "comment": 1, "link": "economy/04.html"}
+      ]
+    }
+  ]
+}

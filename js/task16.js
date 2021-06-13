@@ -18,19 +18,7 @@
 
 const ul = document.getElementById('lists');
 
-const btn1 = document.createElement('button');
-btn1.id = 'news';
-btn1.innerHTML = "ニュース";
-
-const btn2 = document.createElement('button');
-btn2.id = 'economy';
-btn2.innerHTML = "経済";
-
-const image1 = document.createElement('img');
-image1.src = "./img/oli.jpg";
-
-const image2 = document.createElement('img');
-image2.src = "./img/economy.jpg";
+const image = document.createElement('img');
 
 const today = new Date();
 const date = `${today.getFullYear()}${(today.getMonth()+1) < 10 ? `0` + (today.getMonth()+1) : (today.getMonth()+1) }${today.getDate() < 10 ? `0` + today.getDate() : today.getDate()}`;
@@ -64,29 +52,107 @@ async function getNewsData() {
   }
 }
 
-const addDataToInnerHTML = data => {
-  const createNode = data.reduce((prev, current) => `${prev}<li>${current.title} ${date - (current.published.split('-').join('')) <= 14 ? "NEW" : ""} ${ (date - current.published) <= 14 ? `New` : '' } ${current.comment >= 1 ? `<img src="./comment.png" alt="comment icon" />` + current.comment : ''}</li>`, "");
-  ul.innerHTML = createNode;
-  ul.prepend(btn1, btn2);
+const addDataToInnerHTML = (res, index) => {
+
+    const data = res.data;
+
+    data.map(item => {
+
+      if(item.selected) {
+        const titles = item.articles.map(article => {
+
+          const li = document.createElement('li');
+          li.textContent = article.title;
+
+          const fragment = document.createDocumentFragment();
+
+          const img = document.createElement('img')
+          img.src = "./comment.png";
+          img.alt = "comment icon";
+
+          const comment = document.createElement('span')
+          comment.innerHTML = article.comment;
+          console.log(comment)
+
+          const newIcon = document.createElement('span');
+          newIcon.innerHTML = " New!"
+
+          if(date - (article.published.split('-').join('')) <= 14) {
+            li.appendChild(newIcon)
+          }
+          if(article.comment > 0)  {
+            li.appendChild(img);
+            li.appendChild(comment);
+          }
+
+          fragment.appendChild(li)
+
+          ul.appendChild(fragment)
+        })
+      }
+    })
+
+}
+
+const renderSelectedCategory = (res, index) => {
+
+  const data = res.data[index];
+
+  const articles = data.articles;
+
+  articles.map(article => {
+    const li = document.createElement('li');
+    li.textContent = article.title;
+
+    const fragment = document.createDocumentFragment();
+
+    const img = document.createElement('img')
+    img.src = "./comment.png";
+    img.alt = "comment icon";
+
+    const comment = document.createElement('span')
+    comment.innerHTML = article.comment;
+    console.log(comment)
+
+    const newIcon = document.createElement('span');
+    newIcon.innerHTML = " New!"
+
+    if(date - (article.published.split('-').join('')) <= 14) {
+      li.appendChild(newIcon)
+    }
+    if(article.comment > 0)  {
+      li.appendChild(img);
+      li.appendChild(comment);
+    }
+
+    fragment.appendChild(li)
+
+    ul.appendChild(fragment)
+    })
+}
+
+const createBtn = res => {
+  res.data.map(item => {
+    const btn = document.createElement('button');
+    btn.className = "btn";
+    btn.id = item.id;
+    btn.innerHTML = item.label;
+
+    ul.parentNode.insertBefore(btn, ul);
+  })
 }
 
 window.addEventListener('load', async (event) => {
   const data = await getNewsData();
-  const newsData = data.filter(el => el.category === 'news')
-  addDataToInnerHTML(newsData);
-  ul.appendChild(image1);
+  addDataToInnerHTML(data);
+  createBtn(data);
+
+  // カテゴリー選択用ボタン
+  document.querySelectorAll('.btn').forEach((item, index) => {
+    item.addEventListener('click', event => {
+      ul.innerHTML = '';
+      renderSelectedCategory(data, index);
+    })
+  })
+
 });
-
-btn1.addEventListener('click', async function() {
-  const data = await getNewsData();
-  const newsData = data.filter(el => el.category === 'news')
-  addDataToInnerHTML(newsData);
-  ul.appendChild(image1);
-})
-
-btn2.addEventListener('click', async function() {
-  const data = await getNewsData();
-  const newsData = data.filter(el => el.category === 'economy')
-  addDataToInnerHTML(newsData);
-  ul.appendChild(image2);
-})
