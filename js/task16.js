@@ -35,7 +35,7 @@ function fetchData() {
   })
 }
 
-async function getNewsData() {
+async function getData() {
 
   ul.appendChild(loader);
 
@@ -47,25 +47,24 @@ async function getNewsData() {
     ul.innerHTML = "サーバーから情報を取得できませんでした。"
   }
   finally {
-    console.log("サーバーから情報が取得できました")
+    console.log("処理が完了しました。")
     ul.removeChild(loader);
   }
 }
 
-const addDataToInnerHTML = (res, index) => {
+const addDataToInnerHTML = (res) => {
 
     const data = res.data;
 
-    const catImage = document.createElement('img');
-
+    const categoryImage = document.createElement('img');
 
     data.map(item => {
 
       if(item.selected) {
 
-        catImage.src = './img/' + item.category + '.jpg';
+        categoryImage.src = `./img/${item.category}.jpg`;
 
-        const titles = item.articles.map(article => {
+        item.articles.map(article => {
 
           const li = document.createElement('li');
           li.textContent = article.title;
@@ -78,13 +77,12 @@ const addDataToInnerHTML = (res, index) => {
 
           const comment = document.createElement('span')
           comment.innerHTML = article.comment;
-          console.log(comment)
 
           const newIcon = document.createElement('span');
           newIcon.innerHTML = " New!"
 
           if(date - (article.published.split('-').join('')) <= 14) {
-            li.appendChild(newIcon)
+            li.appendChild(newIcon);
           }
           if(article.comment > 0)  {
             li.appendChild(img);
@@ -92,54 +90,13 @@ const addDataToInnerHTML = (res, index) => {
           }
 
           fragment.appendChild(li);
-          fragment.appendChild(catImage);
+          fragment.appendChild(categoryImage);
 
-          ul.appendChild(fragment)
+          ul.appendChild(fragment);
         })
       }
     })
 
-}
-
-const renderSelectedCategory = (res, index) => {
-
-  const data = res.data[index];
-
-  const catImage = document.createElement('img');
-  catImage.src = './img/' + data.category + '.jpg';
-
-  const articles = data.articles;
-
-  articles.map(article => {
-    const li = document.createElement('li');
-    li.textContent = article.title;
-
-    const fragment = document.createDocumentFragment();
-
-    const img = document.createElement('img')
-    img.src = "./comment.png";
-    img.alt = "comment icon";
-
-    const comment = document.createElement('span')
-    comment.innerHTML = article.comment;
-    console.log(comment)
-
-    const newIcon = document.createElement('span');
-    newIcon.innerHTML = " New!"
-
-    if(date - (article.published.split('-').join('')) <= 14) {
-      li.appendChild(newIcon)
-    }
-    if(article.comment > 0)  {
-      li.appendChild(img);
-      li.appendChild(comment);
-    }
-
-    fragment.appendChild(li);
-    fragment.appendChild(catImage);
-
-    ul.appendChild(fragment);
-    })
 }
 
 const createBtn = res => {
@@ -153,17 +110,23 @@ const createBtn = res => {
   })
 }
 
-window.addEventListener('load', async (event) => {
-  const data = await getNewsData();
-  addDataToInnerHTML(data);
-  createBtn(data);
-
-  // カテゴリー選択用ボタン
-  document.querySelectorAll('.btn').forEach((item, index) => {
+const switchTab = res => {
+  document.querySelectorAll('.btn').forEach((item) => {
     item.addEventListener('click', event => {
+      const target = Number(event.target.id);
       ul.innerHTML = '';
-      renderSelectedCategory(data, index);
+
+      res.data.forEach(item => {
+        item.id === target ? item.selected = true : item.selected = false;
+      })
+      addDataToInnerHTML(res);
     })
   })
+}
 
-});
+(async function onDataLoad() {
+  const data = await getData();
+  addDataToInnerHTML(data);
+  createBtn(data);
+  switchTab(data);
+}());
