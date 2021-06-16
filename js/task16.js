@@ -18,8 +18,6 @@
 
 const ul = document.getElementById('lists');
 
-const image = document.createElement('img');
-
 const today = new Date();
 const date = `${today.getFullYear()}${(today.getMonth()+1) < 10 ? `0` + (today.getMonth()+1) : (today.getMonth()+1) }${today.getDate() < 10 ? `0` + today.getDate() : today.getDate()}`;
 
@@ -52,55 +50,61 @@ async function getData() {
   }
 }
 
-const addDataToInnerHTML = (res) => {
+function createListItem(article) {
+  
+  return article.data.forEach(item => {
 
-    const data = res.data;
+      item.articles.forEach(el => {
 
-    const categoryImage = document.createElement('img');
+        const li = document.createElement('li');
+        li.textContent = article.title;
+        
+      
+        const img = document.createElement('img')
+        img.src = "./comment.png";
+        img.alt = "comment icon";
+      
+        const comment = document.createElement('span')
+        comment.innerHTML = article.comment;
+      
+        const newIcon = document.createElement('span');
+        newIcon.innerHTML = " New!"
+      
+        if(date - (el.published.split('-').join('')) <= 14) {
+          li.appendChild(newIcon);          
+        }
+        if(el.comment > 0)  {
+          li.appendChild(img);
+          li.appendChild(comment);
+        }
+      }) 
 
-    data.map(item => {
+    })     
+        
+}
 
-      if(item.selected) {
+const addDataToInnerHTML = data => {
+
+    const fragment = document.createDocumentFragment();
+    ul.appendChild(fragment);
+
+    const categoryImage = document.createElement('img');        
+
+    data.forEach(item => {
+      if(data.selected) {
 
         categoryImage.src = `./img/${item.category}.jpg`;
-
-        item.articles.map(article => {
-
-          const li = document.createElement('li');
-          li.textContent = article.title;
-
-          const fragment = document.createDocumentFragment();
-
-          const img = document.createElement('img')
-          img.src = "./comment.png";
-          img.alt = "comment icon";
-
-          const comment = document.createElement('span')
-          comment.innerHTML = article.comment;
-
-          const newIcon = document.createElement('span');
-          newIcon.innerHTML = " New!"
-
-          if(date - (article.published.split('-').join('')) <= 14) {
-            li.appendChild(newIcon);
-          }
-          if(article.comment > 0)  {
-            li.appendChild(img);
-            li.appendChild(comment);
-          }
-
-          fragment.appendChild(li);
+                
+        data.articles.forEach(article => {          
           fragment.appendChild(categoryImage);
-
           ul.appendChild(fragment);
         })
       }
-    })
-
+    })    
 }
 
 const createBtn = res => {
-  res.data.map(item => {
+  res.data.forEach(item => {
     const btn = document.createElement('button');
     btn.className = "btn";
     btn.id = item.id;
@@ -126,7 +130,9 @@ const switchTab = res => {
 
 (async function onDataLoad() {
   const data = await getData();
-  addDataToInnerHTML(data);
+  const list = createListItem(data);
+  console.log("list", list)
+  addDataToInnerHTML(list);
   createBtn(data);
   switchTab(data);
 }());
