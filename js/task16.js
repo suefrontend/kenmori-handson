@@ -50,57 +50,50 @@ async function getData() {
   }
 }
 
-function createListItem(article) {
+function createLiContent(article) {
+    const li = document.createElement('li');
+    li.textContent = article.title;
+          
+    const img = document.createElement('img')
+    img.src = "./comment.png";
+    img.alt = "comment icon";
   
-  return article.data.forEach(item => {
+    const comment = document.createElement('span')
+    comment.innerHTML = article.comment;
+  
+    const newIcon = document.createElement('span');
+    newIcon.innerHTML = " New!"
+  
+    if(date - (article.published.split('-').join('')) <= 14) {
+      li.appendChild(newIcon);          
+    }
+    if(article.comment > 0)  {
+      li.appendChild(img);
+      li.appendChild(comment);
+    }
 
-      item.articles.forEach(el => {
-
-        const li = document.createElement('li');
-        li.textContent = article.title;
-        
-      
-        const img = document.createElement('img')
-        img.src = "./comment.png";
-        img.alt = "comment icon";
-      
-        const comment = document.createElement('span')
-        comment.innerHTML = article.comment;
-      
-        const newIcon = document.createElement('span');
-        newIcon.innerHTML = " New!"
-      
-        if(date - (el.published.split('-').join('')) <= 14) {
-          li.appendChild(newIcon);          
-        }
-        if(el.comment > 0)  {
-          li.appendChild(img);
-          li.appendChild(comment);
-        }
-      }) 
-
-    })     
-        
+    return li;
 }
 
-const addDataToInnerHTML = data => {
-
+const createArticleContent = res => {
+    const data = res.data;
     const fragment = document.createDocumentFragment();
-    ul.appendChild(fragment);
-
-    const categoryImage = document.createElement('img');        
-
+    const categoryImage = document.createElement('img');                
+            
     data.forEach(item => {
-      if(data.selected) {
+      if(item.selected) {
 
-        categoryImage.src = `./img/${item.category}.jpg`;
-                
-        data.articles.forEach(article => {          
+        categoryImage.src = `./img/${"item", item.category}.jpg`;
+        
+        item.articles.forEach(article => {
+          const li = createLiContent(article);
+          
+          fragment.appendChild(li);
           fragment.appendChild(categoryImage);
-          ul.appendChild(fragment);
         })
       }
     })    
+    ul.appendChild(fragment);
 }
 
 const createBtn = res => {
@@ -109,7 +102,6 @@ const createBtn = res => {
     btn.className = "btn";
     btn.id = item.id;
     btn.innerHTML = item.label;
-
     ul.parentNode.insertBefore(btn, ul);
   })
 }
@@ -119,20 +111,17 @@ const switchTab = res => {
     item.addEventListener('click', event => {
       const target = Number(event.target.id);
       ul.innerHTML = '';
-
       res.data.forEach(item => {
         item.id === target ? item.selected = true : item.selected = false;
       })
-      addDataToInnerHTML(res);
+      createArticleContent(res);
     })
   })
 }
 
 (async function onDataLoad() {
   const data = await getData();
-  const list = createListItem(data);
-  console.log("list", list)
-  addDataToInnerHTML(list);
+  createArticleContent(data);
   createBtn(data);
   switchTab(data);
 }());
