@@ -50,7 +50,7 @@ async function getData() {
   }
 }
 
-function createLiContent(article) {
+function createArticle(article) {
     const li = document.createElement('li');
     li.textContent = article.title;
           
@@ -86,7 +86,7 @@ const createArticleContent = res => {
         categoryImage.src = `./img/${"item", item.category}.jpg`;
         
         item.articles.forEach(article => {
-          const li = createLiContent(article);
+          const li = createArticle(article);
           
           fragment.appendChild(li);
           fragment.appendChild(categoryImage);
