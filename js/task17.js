@@ -1,21 +1,8 @@
-// 画面遷移してから3秒後に解決されるPromiseが返すオブジェクトを元にimgタグを5つつくる。
-
-// それぞれは.z-indexで重ねた状態。クリックを押すと画像が変わる
-
-// 5枚中何枚目かを表示して、5/5の場合Nextの矢印はdisabledにする。1/5枚の時はBackボタンはdisabledにする
-
-// for か map でループして、ボタンを押すと、[1] が表示されるようにする
-
-// loadされた時は、[0] が表示されている
-// もしボタンを押すと、[1]が表示される
-// Prev Next ボタンが必要
-
-
 const ul = document.getElementById('lists');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 
-// loader画像
+// loader
 const loader = document.createElement('img');
 loader.src = "./img/loading-circle.gif";
 
@@ -46,6 +33,8 @@ async function getData() {
   }
 }
 
+let currentImage = 0;
+
 function displayImage(res) {
   const data = res.data;  
 
@@ -61,14 +50,13 @@ function displayImage(res) {
   ul.appendChild(fragment);
 }
 
-let currentImage = 0;
-
 function createPrevButton() {
   const prevBtn = document.createElement('button');
   prevBtn.id = "prev";
   prevBtn.innerHTML = "Prev";
   prevBtn.disabled = true;
   ul.parentNode.insertBefore(prevBtn, ul);
+  console.log("prevBtn", prevBtn);
 }
 
 function createNextButton() {
@@ -77,10 +65,12 @@ function createNextButton() {
   nextBtn.innerHTML = "Next";
   nextBtn.disabled = false;
   ul.parentNode.appendChild(nextBtn);
+  console.log("nextBtn", nextBtn);
 }
 
 if(prevBtn) {
   prevBtn.addEventListener('click', async function(e) {
+    console.log("prevBtn was cllicked");
     const res = await getData();
   
     e.target.disabled = true;
@@ -105,13 +95,6 @@ if(nextBtn) {
     }
   })
 }
-
-// (async function onDataLoad() {
-//   const data = await getData();
-//   displayImage(data);    
-//   createPrevButton();
-//   createNextButton();
-// }());
 
 document.addEventListener("DOMContentLoaded", async function() {
   createPrevButton();
