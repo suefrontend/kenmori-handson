@@ -45,7 +45,8 @@ async function getData() {
   }
 }
 
-function displayImage(res) {
+async function displayImage() {
+  const res = await getData();
   const data = res.data;  
   const loaderImage = createLoader();
   const fragment = document.createDocumentFragment();
@@ -81,7 +82,6 @@ createNextButton();
 
 const prevBtn = document.getElementById('prev');
 prevBtn.addEventListener('click', async function(e) {
-  const res = await getData();
 
   e.target.disabled = true;
 
@@ -89,7 +89,7 @@ prevBtn.addEventListener('click', async function(e) {
     e.target.disabled = false;
     nextBtn.disabled = false;
     currentImage--;
-    displayImage(res);
+    displayImage();
   }
   if(currentImage === 0) {
     e.target.disabled = true;
@@ -98,19 +98,16 @@ prevBtn.addEventListener('click', async function(e) {
 
 const nextBtn = document.getElementById('next');
 nextBtn.addEventListener('click', async function(e) {
-  const res = await getData();
 
-  if(currentImage < res.data.length - 1) {
-    prevBtn.disabled = false;
-    currentImage++;
-    displayImage(res);
-  }
+  prevBtn.disabled = false;
+  currentImage++;
+  displayImage();
+
   if(currentImage === 4) {
     e.target.disabled = true;
   }
 })
 
 document.addEventListener("DOMContentLoaded", async function() {
-  const data = await getData();
-  displayImage(data);    
+  displayImage();    
 });
