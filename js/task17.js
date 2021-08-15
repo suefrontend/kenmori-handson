@@ -30,6 +30,7 @@ async function getData() {
 
   li.appendChild(loaderImage)
   fragment.appendChild(li)
+  ul.appendChild(fragment)
    
   try {
     ul.appendChild(fragment);
@@ -45,21 +46,28 @@ async function getData() {
   }
 }
 
-async function displayImage() {
+async function displayImage(currentImage) {
   const res = await getData();
   const data = res.data;  
   const loaderImage = createLoader();
   const fragment = document.createDocumentFragment();
 
-  const image = document.createElement('img');
-  const li = document.createElement('li');
-  li.classList.add('active');
-  image.src = data[currentImage].image;
- 
-  li.appendChild(image);
-  fragment.appendChild(li);
+  let images = data.map(el => {
+
+    const image = document.createElement('img');
+    const li = document.createElement('li');
+    li.classList.add('active');
+    
+    image.src = el.image;
+    li.appendChild(image);
+  
+    return li;
+  })
+
+  fragment.appendChild(images[currentImage]);
   ul.innerHTML = "";
   ul.appendChild(fragment);
+  
 }
 
 function createPrevButton() {
@@ -89,7 +97,7 @@ prevBtn.addEventListener('click', async function(e) {
     e.target.disabled = false;
     nextBtn.disabled = false;
     currentImage--;
-    displayImage();
+    displayImage(currentImage);
   }
   if(currentImage === 0) {
     e.target.disabled = true;
@@ -101,7 +109,8 @@ nextBtn.addEventListener('click', async function(e) {
 
   prevBtn.disabled = false;
   currentImage++;
-  displayImage();
+  console.log(currentImage)
+  displayImage(currentImage);
 
   if(currentImage === 4) {
     e.target.disabled = true;
@@ -109,5 +118,5 @@ nextBtn.addEventListener('click', async function(e) {
 })
 
 document.addEventListener("DOMContentLoaded", async function() {
-  displayImage();    
+  displayImage(currentImage);    
 });
