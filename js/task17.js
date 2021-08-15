@@ -35,7 +35,9 @@ async function getData() {
   try {
     ul.appendChild(fragment);
     const response = await fetchData();
-    return await response.json();
+    const res = await response.json();
+    const data = res.data;  
+    return data;
   }
   catch(error) {
     ul.innerHTML = "Couldn't get response."
@@ -47,8 +49,8 @@ async function getData() {
 }
 
 async function displayImage(currentImage) {
-  const res = await getData();
-  const data = res.data;  
+  const data = await getData();
+
   const loaderImage = createLoader();
   const fragment = document.createDocumentFragment();
 
@@ -109,7 +111,6 @@ nextBtn.addEventListener('click', async function(e) {
 
   prevBtn.disabled = false;
   currentImage++;
-  console.log(currentImage)
   displayImage(currentImage);
 
   if(currentImage === 4) {
