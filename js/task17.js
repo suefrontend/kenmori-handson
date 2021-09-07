@@ -66,7 +66,7 @@ async function getData() {
 getData();
 
 function displayImage(currentImage, clickEvent) {
-	let imageShown, nextImage;
+	let imageShown, nextImage, prevImage;
 	let btnType = clickEvent.id;
 
 	if (btnType === 'next') {
