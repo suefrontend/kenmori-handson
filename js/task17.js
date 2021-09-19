@@ -4,12 +4,11 @@ let currentImage = 0;
 const imagesArr = [];
 
 function createLoader() {
-	const fragment = document.createDocumentFragment();
 	const loaderContainer = document.createElement('li');
 	const loader = document.createElement('img');
 	loader.src = './img/loading-circle.gif';
-	fragment.appendChild(loader);
-	loader.appendChild(loaderContainer);
+	ul.appendChild(loader).appendChild(loaderContainer);
+
 	loader.classList.add('loader_image');
 	return loader;
 }
@@ -25,63 +24,59 @@ function fetchData() {
 async function getData() {
 	const loaderImage = createLoader();
 
-	const fragment = document.createDocumentFragment();
 	const li = document.createElement('li');
 	li.classList.add('loader');
 
-	li.appendChild(loaderImage);
-	fragment.appendChild(li);
-	console.log('fragment', fragment);
-	ul.appendChild(fragment);
+	ul.appendChild(li).appendChild(loaderImage);
+
+	let response, res, data;
 
 	try {
-		const response = await fetchData();
-		const res = await response.json();
-		const data = res.data;
+		response = await fetchData();
+		res = await response.json();
+		data = res.data;
 
-		data.map((el) => {
+		return data;
+	} catch (error) {
+		ul.innerHTML = "Couldn't get response.";
+	} finally {
+		console.log('You got the result.');
+
+		data.forEach((el, index) => {
+			const fragment = document.createDocumentFragment();
 			const image = document.createElement('img');
 			const li = document.createElement('li');
 
 			image.src = el.image;
 			li.appendChild(image);
-
 			imagesArr.push(li);
-		});
 
-		imagesArr.forEach((el, index) => {
-			el.classList.add('slide-images');
+			li.classList.add('slide-images');
 
 			if (index === 0) {
-				el.classList.add('z-index-100');
+				li.classList.add('z-index-100');
 			}
-			ul.appendChild(el);
+			fragment.appendChild(li);
+			ul.appendChild(fragment);
 		});
-	} catch (error) {
-		ul.innerHTML = "Couldn't get response.";
-	} finally {
-		console.log('You got the result.');
 	}
 }
 getData();
 
-function displayImage(currentImage, clickEvent) {
-	let imageShown, nextImage, prevImage;
-	let btnType = clickEvent.id;
+function displayPrevImage(currentImage) {
+	const imageShown = imagesArr[currentImage];
+	const prevImage = imagesArr[currentImage + 1];
 
-	if (btnType === 'next') {
-		imageShown = imagesArr[currentImage];
-		nextImage = imagesArr[currentImage - 1];
+	imageShown.classList.add('z-index-100');
+	prevImage.classList.remove('z-index-100');
+}
 
-		imageShown.classList.add('z-index-100');
-		nextImage.classList.remove('z-index-100');
-	} else if (btnType === 'prev') {
-		imageShown = imagesArr[currentImage];
-		prevImage = imagesArr[currentImage + 1];
+function displayNextImage(currentImage) {
+	const imageShown = imagesArr[currentImage];
+	const nextImage = imagesArr[currentImage - 1];
 
-		imageShown.classList.add('z-index-100');
-		prevImage.classList.remove('z-index-100');
-	}
+	imageShown.classList.add('z-index-100');
+	nextImage.classList.remove('z-index-100');
 }
 
 function createPrevButton() {
@@ -103,27 +98,27 @@ createPrevButton();
 createNextButton();
 
 const prevBtn = document.getElementById('prev');
-prevBtn.addEventListener('click', function (e) {
-	e.target.disabled = true;
+prevBtn.addEventListener('click', function () {
+	prevBtn.disabled = true;
 
 	if (currentImage > 0) {
-		e.target.disabled = false;
-		nextBtn.disabled = false;
 		currentImage--;
-		displayImage(currentImage, e.target);
+		prevBtn.disabled = false;
+		nextBtn.disabled = false;
+		displayPrevImage(currentImage);
 	}
 	if (currentImage === 0) {
-		e.target.disabled = true;
+		prevBtn.disabled = true;
 	}
 });
 
 const nextBtn = document.getElementById('next');
-nextBtn.addEventListener('click', function (e) {
-	prevBtn.disabled = false;
+nextBtn.addEventListener('click', function () {
 	currentImage++;
-	displayImage(currentImage, e.target);
+	prevBtn.disabled = false;
+	displayNextImage(currentImage);
 
-	if (currentImage === 4) {
-		e.target.disabled = true;
+	if (currentImage === imagesArr.length - 1) {
+		nextBtn.disabled = true;
 	}
 });
