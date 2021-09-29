@@ -41,24 +41,6 @@ async function getData() {
 		ul.innerHTML = "Couldn't get response.";
 	} finally {
 		console.log('You got the result.');
-
-		data.forEach((el, index) => {
-			const fragment = document.createDocumentFragment();
-			const image = document.createElement('img');
-			const li = document.createElement('li');
-
-			image.src = el.image;
-			li.appendChild(image);
-			imagesArr.push(li);
-
-			li.classList.add('slide-images');
-
-			if (index === 0) {
-				li.classList.add('z-index-100');
-			}
-			fragment.appendChild(li);
-			ul.appendChild(fragment);
-		});
 	}
 }
 getData();
@@ -121,4 +103,27 @@ nextBtn.addEventListener('click', function () {
 	if (currentImage === imagesArr.length - 1) {
 		nextBtn.disabled = true;
 	}
+});
+
+document.addEventListener('DOMContentLoaded', async function () {
+	const data = await getData();
+	const fragment = document.createDocumentFragment();
+
+	data.forEach((el, index) => {
+		const image = document.createElement('img');
+		const li = document.createElement('li');
+
+		image.src = el.image;
+		li.appendChild(image);
+		imagesArr.push(li);
+
+		li.classList.add('slide-images');
+
+		if (index === 0) {
+			li.classList.add('z-index-100');
+		}
+		fragment.appendChild(li);
+	});
+
+	ul.appendChild(fragment);
 });
