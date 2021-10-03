@@ -3,14 +3,17 @@ const ul = document.getElementById('lists');
 let currentImage = 0;
 const imagesArr = [];
 
-function createLoader() {
-	const loaderContainer = document.createElement('li');
+function showLoader() {
+	const li = document.createElement('li');
 	const loader = document.createElement('img');
-	loader.src = './img/loading-circle.gif';
-	ul.appendChild(loader).appendChild(loaderContainer);
-
+	li.classList.add('loader');
 	loader.classList.add('loader_image');
-	return loader;
+	loader.src = './img/loading-circle.gif';
+	ul.appendChild(li).appendChild(loader);
+}
+function removeLoader() {
+	const loaderImage = document.querySelector('.loader');
+	ul.removeChild(loaderImage);
 }
 
 function fetchData() {
@@ -22,25 +25,19 @@ function fetchData() {
 }
 
 async function getData() {
-	const loaderImage = createLoader();
+	showLoader();
 
-	const li = document.createElement('li');
-	li.classList.add('loader');
-
-	ul.appendChild(li).appendChild(loaderImage);
-
-	let response, res, data;
+	// let response, res, data;
 
 	try {
-		response = await fetchData();
-		res = await response.json();
-		data = res.data;
-
+		const response = await fetchData();
+		const res = await response.json();
+		const data = res.data;
 		return data;
 	} catch (error) {
 		ul.innerHTML = "Couldn't get response.";
 	} finally {
-		console.log('You got the result.');
+		removeLoader();
 	}
 }
 getData();
