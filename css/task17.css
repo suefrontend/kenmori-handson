@@ -60,7 +60,7 @@ button:disabled {
 	cursor: auto;
 	opacity: 0.2;
 }
-.z-index-100 {
+.is-shown {
 	z-index: 100;
 }
 .page {

@@ -41,16 +41,16 @@ async function getData() {
 }
 
 function displayPrevImage() {
-	imagesArr[currentImage].classList.remove('z-index-100');
+	imagesArr[currentImage].classList.remove('is-shown');
 	currentImage--;
-	imagesArr[currentImage].classList.add('z-index-100');
+	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
 
 function displayNextImage() {
-	imagesArr[currentImage].classList.remove('z-index-100');
+	imagesArr[currentImage].classList.remove('is-shown');
 	currentImage++;
-	imagesArr[currentImage].classList.add('z-index-100');
+	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
 
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 		li.classList.add('slide-images');
 
 		if (index === 0) {
-			li.classList.add('z-index-100');
+			li.classList.add('is-shown');
 		}
 		fragment.appendChild(li);
 	});
