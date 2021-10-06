@@ -1,4 +1,5 @@
 const ul = document.getElementById('lists');
+const page = document.querySelector('.page');
 
 let currentImage = 0;
 const imagesArr = [];
@@ -27,8 +28,6 @@ function fetchData() {
 async function getData() {
 	showLoader();
 
-	// let response, res, data;
-
 	try {
 		const response = await fetchData();
 		const res = await response.json();
@@ -40,22 +39,19 @@ async function getData() {
 		removeLoader();
 	}
 }
-getData();
 
-function displayPrevImage(currentImage) {
-	const imageShown = imagesArr[currentImage];
-	const prevImage = imagesArr[currentImage + 1];
-
-	imageShown.classList.add('z-index-100');
-	prevImage.classList.remove('z-index-100');
+function displayPrevImage() {
+	imagesArr[currentImage].classList.remove('z-index-100');
+	currentImage--;
+	imagesArr[currentImage].classList.add('z-index-100');
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
 
-function displayNextImage(currentImage) {
-	const imageShown = imagesArr[currentImage];
-	const nextImage = imagesArr[currentImage - 1];
-
-	imageShown.classList.add('z-index-100');
-	nextImage.classList.remove('z-index-100');
+function displayNextImage() {
+	imagesArr[currentImage].classList.remove('z-index-100');
+	currentImage++;
+	imagesArr[currentImage].classList.add('z-index-100');
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
 
 function createPrevButton() {
@@ -81,10 +77,9 @@ prevBtn.addEventListener('click', function () {
 	prevBtn.disabled = true;
 
 	if (currentImage > 0) {
-		currentImage--;
 		prevBtn.disabled = false;
 		nextBtn.disabled = false;
-		displayPrevImage(currentImage);
+		displayPrevImage();
 	}
 	if (currentImage === 0) {
 		prevBtn.disabled = true;
@@ -93,9 +88,8 @@ prevBtn.addEventListener('click', function () {
 
 const nextBtn = document.getElementById('next');
 nextBtn.addEventListener('click', function () {
-	currentImage++;
 	prevBtn.disabled = false;
-	displayNextImage(currentImage);
+	displayNextImage();
 
 	if (currentImage === imagesArr.length - 1) {
 		nextBtn.disabled = true;
@@ -123,4 +117,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 	});
 
 	ul.appendChild(fragment);
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 });
+console.log(currentImage, imagesArr.length);

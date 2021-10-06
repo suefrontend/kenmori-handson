@@ -58,7 +58,35 @@ button {
 }
 button:disabled {
 	cursor: auto;
+	opacity: 0.2;
 }
 .z-index-100 {
 	z-index: 100;
+}
+.page {
+	text-align: center;
+}
+#prev {
+	/* font-family: 'icomoon' !important; */
+	display: block;
+	text-indent: -9999px;
+	width: 100px;
+	height: 82px;
+	background-image: url(../img/task17/backward.svg);
+	background-color: transparent;
+	background-size: 100% 100%;
+	padding: 8px 15px;
+	border: 0;
+}
+#next {
+	/* font-family: 'icomoon' !important; */
+	display: block;
+	text-indent: -9999px;
+	width: 100px;
+	height: 82px;
+	background-image: url(../img/task17/forward.svg);
+	background-color: transparent;
+	background-size: 100% 100%;
+	padding: 8px 15px;
+	border: 0;
 }
