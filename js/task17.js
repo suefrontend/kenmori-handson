@@ -117,6 +117,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 	});
 
 	ul.appendChild(fragment);
-	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+	page.textContent = `${currentImage + 1} / ${imagesArr.length}`;
 });
-console.log(currentImage, imagesArr.length);
