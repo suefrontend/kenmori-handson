@@ -1,6 +1,6 @@
-"# kenmori-handson"
+### Exercises for Front-End Developer
 
-Add a new list item to unorederd list
+These are the exercises that we worked on JavaScript study group offered by our JavaScript mentor [Kenji Morita](https://github.com/kenmori).
 
 <table>
 <tr>
