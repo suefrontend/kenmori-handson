@@ -9,7 +9,7 @@ function showLoader() {
 	const loader = document.createElement('img');
 	li.classList.add('loader');
 	loader.classList.add('loader_image');
-	loader.src = './img/loading-circle.gif';
+	loader.src = './images/loading-circle.gif';
 	ul.appendChild(li).appendChild(loader);
 }
 function removeLoader() {
