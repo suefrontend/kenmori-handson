@@ -1,29 +1,23 @@
 const data = [
-  {to: "bookmark.html", img: "1.png", alt:"画像1", text: "ブックマーク"},
-  {to: "message.html", img: "2.png", alt:"画像2", text: "メッセージ"}
-]
+	{ to: 'bookmark.html', img: '1.png', alt: 'Image', text: 'bookmark' },
+	{ to: 'message.html', img: '2.png', alt: 'Image 2', text: 'message' },
+];
 
 const ul = document.querySelector('#lists');
 
-// loader画像
+// loader
 const loader = document.createElement('img');
-loader.src = "./img/loading-circle.gif";
+loader.src = 'loading-circle.gif';
 
-//loading画像
+//loading
 ul.appendChild(loader);
 
-const promise = new Promise((resolve,reject) => {
-
-    // いままでresolveとしていたところでrejectを実行
-    //3秒後にrejectを実行
-    setTimeout(() => {
-      reject(data);
-    }, 3000)
-
+const promise = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		reject(data);
+	}, 3000);
 });
 
-//thenでその値をコンソール出力してください
-// エラーを起こしてcatchでエラーをキャッチ
 promise.catch((error) => {
-  console.log("エラーが起こりました", error);
-})
+	console.log('An error has been occurred', error);
+});
