@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <title>Task 14: Create a popup modal</title>
-</head>
-<body>
-<div class="container">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Exercise 14: Create a popup modal</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="title">
+				<h1 class="task_title">Exercise 14:<br />Create a popup modal</h1>
+			</div>
 
-  <div class="title">
-    <h1 class="task_title">Task 14:<br>Create a popup modal</h1>
-  </div>
+			<section>
+				<button id="modal-btn">Popup Modal</button>
+				<ul id="lists"></ul>
 
-  <section>
-
-    <button id="modal-btn">Popup Modal</button>
-    <ul id="lists"></ul>
-
-    <div class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <button id="fetch-btn">Fetch Data</button>
-
-      </div>
-    </div>
-
-
-  </section>
-
-</div>
-  <script src="js/task13.js"></script>
-</body>
+				<div class="modal">
+					<div class="modal-content">
+						<span class="close-btn">&times;</span>
+						<button id="fetch-btn">Fetch Data</button>
+					</div>
+				</div>
+			</section>
+		</div>
+		<script src="main.js"></script>
+	</body>
 </html>
