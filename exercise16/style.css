@@ -86,15 +86,6 @@ ul {
 	box-sizing: border-box;
 	position: relative;
 }
-li {
-	margin: 0 auto;
-	padding: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 0;
-}
 li.active img {
 	width: 100%;
 }
