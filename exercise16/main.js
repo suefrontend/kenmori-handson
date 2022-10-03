@@ -1,127 +1,107 @@
-// DONE - それぞれのカテゴリタブを開くことができてそれぞれのジャンルに応じた記事が4つ表示できる。(記事のタイトル名は適当)
-
-// DONE - それぞれのカテゴリにはそれぞれ固有の画像が入る(右側四角。画像は適当)
-
-// DONE - 記事にはnewという新着かどうかのラベルがつく(どこの記事にそれが入るかは適当でいいです)
-
-// DONE - 記事にはそれぞれコメントがあり、0件なら表示しない、1以上ならアイコンと共に数字が表示される
-
-// DONE - カテゴリタブは切り替えられる。面倒なら2つのカテゴリだけでよいです。その場合ニュースと経済だけにします
-  // DONE - タブ切り替え用のボタンを作る。ボタンにeventListenerを付けて、各カテゴリーのデータをfetchする
-  // DONE - そのボタンは、createElementで作る
-
-// DONE - どのカテゴリタブを初期表示時に選んでいるかはデータとして持っている
-
-// DONE - htmlはulだけ作ってあとはcreateElementで作る
-
-// DONE - try-catchでエラー時はulの中に「ただいまサーバー側で通信がぶっ壊れています」みたいなテキストを画面内に表示すること
-
 const ul = document.getElementById('lists');
 
 const today = new Date();
-const date = `${today.getFullYear()}${(today.getMonth()+1) < 10 ? `0` + (today.getMonth()+1) : (today.getMonth()+1) }${today.getDate() < 10 ? `0` + today.getDate() : today.getDate()}`;
+const date = `${today.getFullYear()}${
+	today.getMonth() + 1 < 10
+		? `0` + (today.getMonth() + 1)
+		: today.getMonth() + 1
+}${today.getDate() < 10 ? `0` + today.getDate() : today.getDate()}`;
 
-// loader画像
+// loader
 const loader = document.createElement('img');
-loader.src = "./img/loading-circle.gif";
+loader.src = 'loading-circle.gif';
 
 function fetchData() {
-  return new Promise((resolve, reject) => {
-
-    resolve(fetch('./data.json'));
-
-  })
+	return new Promise((resolve, reject) => {
+		resolve(fetch('./data.json'));
+	});
 }
 
 async function getData() {
+	ul.appendChild(loader);
 
-  ul.appendChild(loader);
-
-  try {
-    const response = await fetchData();
-    return await response.json();
-  }
-  catch(error) {
-    ul.innerHTML = "サーバーから情報を取得できませんでした。"
-  }
-  finally {
-    console.log("処理が完了しました。")
-    ul.removeChild(loader);
-  }
+	try {
+		const response = await fetchData();
+		return await response.json();
+	} catch (error) {
+		ul.innerHTML = 'Could not fetch data from server';
+	} finally {
+		console.log('Process has been finished');
+		ul.removeChild(loader);
+	}
 }
 
 function createArticle(article) {
-    const li = document.createElement('li');
-    li.textContent = article.title;
-          
-    const img = document.createElement('img')
-    img.src = "./comment.png";
-    img.alt = "comment icon";
-  
-    const comment = document.createElement('span')
-    comment.innerHTML = article.comment;
-  
-    const newIcon = document.createElement('span');
-    newIcon.innerHTML = " New!"
-  
-    if(date - (article.published.split('-').join('')) <= 14) {
-      li.appendChild(newIcon);          
-    }
-    if(article.comment > 0)  {
-      li.appendChild(img);
-      li.appendChild(comment);
-    }
+	const li = document.createElement('li');
+	li.textContent = article.title;
 
-    return li;
+	const img = document.createElement('img');
+	img.src = 'comment.png';
+	img.alt = 'comment icon';
+
+	const comment = document.createElement('span');
+	comment.innerHTML = article.comment;
+
+	const newIcon = document.createElement('span');
+	newIcon.innerHTML = ' New!';
+
+	if (date - article.published.split('-').join('') <= 14) {
+		li.appendChild(newIcon);
+	}
+	if (article.comment > 0) {
+		li.appendChild(img);
+		li.appendChild(comment);
+	}
+
+	return li;
 }
 
-const createArticleContent = res => {
-    const data = res.data;
-    const fragment = document.createDocumentFragment();
-    const categoryImage = document.createElement('img');                
-            
-    data.forEach(item => {
-      if(item.selected) {
+const createArticleContent = (res) => {
+	const data = res.data;
+	const fragment = document.createDocumentFragment();
+	const categoryImage = document.createElement('img');
 
-        categoryImage.src = `./img/${"item", item.category}.jpg`;
-        
-        item.articles.forEach(article => {
-          const li = createArticle(article);
-          
-          fragment.appendChild(li);
-          fragment.appendChild(categoryImage);
-        })
-      }
-    })    
-    ul.appendChild(fragment);
-}
+	data.forEach((item) => {
+		if (item.selected) {
+			categoryImage.src = `${('item', item.category)}.jpg`;
 
-const createBtn = res => {
-  res.data.forEach(item => {
-    const btn = document.createElement('button');
-    btn.className = "btn";
-    btn.id = item.id;
-    btn.innerHTML = item.label;
-    ul.parentNode.insertBefore(btn, ul);
-  })
-}
+			item.articles.forEach((article) => {
+				const li = createArticle(article);
 
-const switchTab = res => {
-  document.querySelectorAll('.btn').forEach((item) => {
-    item.addEventListener('click', event => {
-      const target = Number(event.target.id);
-      ul.innerHTML = '';
-      res.data.forEach(item => {
-        item.id === target ? item.selected = true : item.selected = false;
-      })
-      createArticleContent(res);
-    })
-  })
-}
+				fragment.appendChild(li);
+				fragment.appendChild(categoryImage);
+			});
+		}
+	});
+	ul.appendChild(fragment);
+};
+
+const createBtn = (res) => {
+	res.data.forEach((item) => {
+		const btn = document.createElement('button');
+		btn.className = 'btn';
+		btn.id = item.id;
+		btn.innerHTML = item.label;
+		ul.parentNode.insertBefore(btn, ul);
+	});
+};
+
+const switchTab = (res) => {
+	document.querySelectorAll('.btn').forEach((item) => {
+		item.addEventListener('click', (event) => {
+			const target = Number(event.target.id);
+			ul.innerHTML = '';
+			res.data.forEach((item) => {
+				item.id === target ? (item.selected = true) : (item.selected = false);
+			});
+			createArticleContent(res);
+		});
+	});
+};
 
 (async function onDataLoad() {
-  const data = await getData();
-  createArticleContent(data);
-  createBtn(data);
-  switchTab(data);
-}());
+	const data = await getData();
+	createArticleContent(data);
+	createBtn(data);
+	switchTab(data);
+})();

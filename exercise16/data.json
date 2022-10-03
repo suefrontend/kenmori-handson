@@ -1,29 +1,69 @@
 {
-  "data": [
-    {
-      "id": 1,
-      "category": "news",
-      "label": "ニュース",
-      "selected": true,
-      "articles": [
-        {"title": "ニュース #1", "published": "2021-05-08", "comment": 0, "link": "news/01.html"},
-        {"title": "ニュース #2", "published": "2021-06-08", "comment": 2, "link": "news/02.html"},
-        {"title": "ニュース #3", "published": "2021-06-08", "comment": 1, "link": "news/03.html"},
-        {"title": "ニュース #4", "published": "2021-05-08", "comment": 0, "link": "news/04.html"}
-      ],
-      "thumbnail": "src/oli.jpg"
-    },
-    {
-      "id": 2,
-      "category": "economy",
-      "label": "経済",
-      "selected": false,
-      "articles": [
-        {"title": "経済 #1", "published": "2021-02-08", "comment": 0, "link": "economy/01.html"},
-        {"title": "経済 #2", "published": "2021-06-08", "comment": 1, "link": "economy/02.html"},
-        {"title": "経済 #3", "published": "2021-03-08", "comment": 0, "link": "economy/03.html"},
-        {"title": "経済 #4", "published": "2021-06-08", "comment": 1, "link": "economy/04.html"}
-      ]
-    }
-  ]
+	"data": [
+		{
+			"id": 1,
+			"category": "news",
+			"label": "News",
+			"selected": true,
+			"articles": [
+				{
+					"title": "News #1",
+					"published": "2021-05-08",
+					"comment": 0,
+					"link": "news/01.html"
+				},
+				{
+					"title": "News #2",
+					"published": "2021-06-08",
+					"comment": 2,
+					"link": "news/02.html"
+				},
+				{
+					"title": "News #3",
+					"published": "2021-06-08",
+					"comment": 1,
+					"link": "news/03.html"
+				},
+				{
+					"title": "News #4",
+					"published": "2021-05-08",
+					"comment": 0,
+					"link": "news/04.html"
+				}
+			],
+			"thumbnail": "src/oli.jpg"
+		},
+		{
+			"id": 2,
+			"category": "economy",
+			"label": "Economic",
+			"selected": false,
+			"articles": [
+				{
+					"title": "Economic #1",
+					"published": "2021-02-08",
+					"comment": 0,
+					"link": "economy/01.html"
+				},
+				{
+					"title": "Economic #2",
+					"published": "2021-06-08",
+					"comment": 1,
+					"link": "economy/02.html"
+				},
+				{
+					"title": "Economic #3",
+					"published": "2021-03-08",
+					"comment": 0,
+					"link": "economy/03.html"
+				},
+				{
+					"title": "Economic #4",
+					"published": "2021-06-08",
+					"comment": 1,
+					"link": "economy/04.html"
+				}
+			]
+		}
+	]
 }
