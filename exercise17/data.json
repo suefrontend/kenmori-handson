@@ -1,24 +1,24 @@
 {
-  "data": [
-    {
-      "id": 1,
-      "image": "../img/task17/img01.jpg"
-    },
-    {
-      "id": 2,
-      "image": "../img/task17/img02.jpg"
-    },
-    {
-      "id": 3,
-      "image": "../img/task17/img03.jpg"
-    },
-    {
-      "id": 4,
-      "image": "../img/task17/img04.jpg"
-    },
-    {
-      "id": 5,
-      "image": "../img/task17/img05.jpg"
-    }
-  ]
+	"data": [
+		{
+			"id": 1,
+			"image": "./images/img01.jpg"
+		},
+		{
+			"id": 2,
+			"image": "./images/img02.jpg"
+		},
+		{
+			"id": 3,
+			"image": "./images/img03.jpg"
+		},
+		{
+			"id": 4,
+			"image": "./images/img04.jpg"
+		},
+		{
+			"id": 5,
+			"image": "./images/img05.jpg"
+		}
+	]
 }

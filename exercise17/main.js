@@ -20,7 +20,7 @@ function removeLoader() {
 function fetchData() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			resolve(fetch('./js/json/task17.json'));
+			resolve(fetch('./data.json'));
 		}, 3000);
 	});
 }
