@@ -5,8 +5,8 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <table>
 <tr>
 <th>Exercise 01</th>
-<td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise01">Add a new list item to unorederd list</a></a></td>
-<td>Preview</td>
+<td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise01">Add a new list item to unorederd list</a></td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise01/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 02</th>
