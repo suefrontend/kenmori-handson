@@ -16,12 +16,12 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 03</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise03">Create DOM using JavaScript and add to unorederd list</a></td>
-<td><a href="https://suefrontend.github.io/kenmori-handson/exercise02/">Preview</a></td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise03/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 04</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise04">Given an array of objects, create the following HTML code</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise04/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 05</th>
