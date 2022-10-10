@@ -26,7 +26,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 05</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise05">Given an array of objects, treat the data as a resolved promise and create the following HTML code</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise05/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 06</th>
