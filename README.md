@@ -41,7 +41,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 08</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise08">Reject a promise and console.log the error using catch</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise08/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 09</th>
