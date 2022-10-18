@@ -51,7 +51,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 10</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise10">Display a loading indicator while fetching data using try-catch-finaliy statement</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise10/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 11</th>
