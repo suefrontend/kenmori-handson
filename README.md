@@ -61,7 +61,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 12</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise12">Fetch data from API by clicking a button</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise12/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 13</th>
