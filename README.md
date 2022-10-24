@@ -76,7 +76,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 15</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise15">Fetch data by submitting a form</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise15/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 16</th>
