@@ -81,7 +81,7 @@ These are the exercises that we worked on JavaScript study group offered by our 
 <tr>
 <th>Exercise 16</th>
 <td><a href="https://github.com/suefrontend/kenmori-handson/tree/main/exercise16">Create a Yahoo-like news list</a></td>
-<td>Preview</td>
+<td><a href="https://suefrontend.github.io/kenmori-handson/exercise16/">Preview</a></td>
 </tr>
 <tr>
 <th>Exercise 17</th>
