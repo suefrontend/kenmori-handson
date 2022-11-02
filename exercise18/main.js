@@ -39,6 +39,23 @@ const getData = async () => {
 	}
 };
 
+const createPrevButton = () => {
+	const prevBtn = document.createElement('button');
+	prevBtn.id = 'prev';
+	prevBtn.innerHTML = 'Prev';
+	prevBtn.disabled = true;
+	ul.parentNode.insertBefore(prevBtn, ul);
+};
+
+const createNextButton = () => {
+	const nextBtn = document.createElement('button');
+	nextBtn.id = 'next';
+	nextBtn.innerHTML = 'Next';
+	ul.parentNode.appendChild(nextBtn);
+};
+
 document.addEventListener('DOMContentLoaded', async function () {
 	const data = await getData();
+	createPrevButton();
+	createNextButton();
 });
