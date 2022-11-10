@@ -1,4 +1,4 @@
-const ul = document.getElementById('lists');
+const ul = document.getElementById('js-lists');
 const page = document.querySelector('.page');
 
 let currentImage = 0;
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 		li.appendChild(image);
 		imagesArr.push(li);
 
-		li.classList.add('slide-images');
+		li.classList.add('slide__list__item');
 
 		if (index === 0) {
 			li.classList.add('is-shown');

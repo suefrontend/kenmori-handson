@@ -49,29 +49,10 @@ pre {
 .title {
 	padding-top: 40px;
 }
-ul {
-	margin: 0;
-	padding: 0;
-	height: 526px;
-	width: 100%;
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	box-sizing: border-box;
-	position: relative;
-}
-li {
-	margin: 0 auto;
-	padding: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 0;
-}
-li.active img {
+.active img {
 	width: 100%;
 }
-li.loader {
+.loader {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -84,16 +65,10 @@ li.loader {
 	align-items: center;
 	justify-content: center;
 }
-li.loader img {
+.loader img {
 	width: auto;
 	margin: 0 auto;
 	position: inherit;
-}
-li.active {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
 }
 .slide {
 	margin: 0 auto;
@@ -103,6 +78,31 @@ li.active {
 	background: #fff;
 	box-sizing: border-box;
 	border: 1px solid #ddd;
+}
+.slide__list {
+	margin: 0;
+	padding: 0;
+	height: 526px;
+	width: 100%;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	box-sizing: border-box;
+	position: relative;
+}
+.slide__list__item {
+	margin: 0 auto;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 0;
+}
+.slide__list__item.active {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
 }
 button {
 	cursor: pointer;
