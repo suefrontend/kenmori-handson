@@ -1,5 +1,6 @@
 const ul = document.getElementById('js-lists');
 const page = document.querySelector('.page');
+const dotContainer = document.getElementById('js-dots');
 
 let currentImage = 0;
 const imagesArr = [];
@@ -38,6 +39,13 @@ async function getData() {
 	} finally {
 		removeLoader();
 	}
+}
+
+function displayImage(id) {
+	currentImage = id;
+	imagesArr[currentImage].classList.add('is-shown');
+
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
 
 function displayPrevImage() {
@@ -96,6 +104,18 @@ nextBtn.addEventListener('click', function () {
 	}
 });
 
+function createDots(numOfImages) {
+	const fragment = document.createDocumentFragment();
+
+	for (let i = 0; i < numOfImages; i++) {
+		let dot = document.createElement('li');
+		dot.classList.add('slide__dot__item');
+		fragment.appendChild(dot);
+	}
+
+	dotContainer.appendChild(fragment);
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
 	const data = await getData();
 	const fragment = document.createDocumentFragment();
@@ -117,5 +137,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 	});
 
 	ul.appendChild(fragment);
+
+	createDots(data.length);
+
+	const dots = document.querySelectorAll('.slide__dot__item');
+
+	dots.forEach((dot, index) => {
+		dot.addEventListener('click', function () {
+			let img = document.querySelector('.is-shown');
+			img.classList.remove('is-shown');
+
+			if (index === 4) {
+				nextBtn.disabled = true;
+				prevBtn.disabled = false;
+			} else if (index === 0) {
+				prevBtn.disabled = true;
+				nextBtn.disabled = false;
+			} else {
+				prevBtn.disabled = false;
+				nextBtn.disabled = false;
+			}
+
+			displayImage(index);
+		});
+	});
+
 	page.textContent = `${currentImage + 1} / ${imagesArr.length}`;
 });
