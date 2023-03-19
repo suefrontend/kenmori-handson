@@ -42,8 +42,35 @@ async function getData() {
 }
 
 function displayImage(id) {
+	console.log('called');
+	console.log('id', id);
 	currentImage = id;
 	imagesArr[currentImage].classList.add('is-shown');
+
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+}
+
+function displayImageAuto(id) {
+	currentImage = id;
+
+	if (currentImage !== 0) {
+		imagesArr[currentImage - 1].classList.remove('is-shown');
+	} else if (currentImage === 0) {
+		imagesArr[4].classList.remove('is-shown');
+	}
+
+	imagesArr[currentImage].classList.add('is-shown');
+
+	if (currentImage === 4) {
+		nextBtn.disabled = true;
+		prevBtn.disabled = false;
+	} else if (currentImage === 0) {
+		prevBtn.disabled = true;
+		nextBtn.disabled = false;
+	} else {
+		prevBtn.disabled = false;
+		nextBtn.disabled = false;
+	}
 
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
 }
@@ -53,6 +80,7 @@ function displayPrevImage() {
 	currentImage--;
 	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+	console.log('currentImage displayPrevImage', currentImage);
 }
 
 function displayNextImage() {
@@ -60,6 +88,14 @@ function displayNextImage() {
 	currentImage++;
 	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+	console.log('currentImage displayNextImage', currentImage);
+}
+
+function slideImages() {
+	imagesArr[currentImage].classList.remove('is-shown');
+	currentImage++;
+	imagesArr[currentImage].classList.add('is-shown');
+	console.log('currentImage slideImages', currentImage);
 }
 
 function createPrevButton() {
@@ -161,6 +197,22 @@ document.addEventListener('DOMContentLoaded', async function () {
 			displayImage(index);
 		});
 	});
+
+	// setTimeout(displayImage(currentImage), 3000);
+
+	function yourFunction() {
+		// do whatever you like here
+
+		displayImageAuto(currentImage);
+		currentImage++;
+
+		setTimeout(yourFunction, 1000);
+
+		if (currentImage === 5) currentImage = 0;
+		console.log('currentImage', currentImage);
+	}
+
+	yourFunction();
 
 	page.textContent = `${currentImage + 1} / ${imagesArr.length}`;
 });
