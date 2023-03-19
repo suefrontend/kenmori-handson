@@ -1,21 +1,16 @@
-const ul = document.getElementById('lists');
+const ul = document.getElementById('js-lists');
 const page = document.querySelector('.page');
+const dotContainer = document.getElementById('js-dots');
 
 let currentImage = 0;
 const imagesArr = [];
-
-// TODO
-
-//// 1. Add pager dots
-
-//// 2. Add self-running function to the slideshow
 
 function showLoader() {
 	const li = document.createElement('li');
 	const loader = document.createElement('img');
 	li.classList.add('loader');
 	loader.classList.add('loader_image');
-	loader.src = './img/loading-circle.gif';
+	loader.src = './images/loading-circle.gif';
 	ul.appendChild(li).appendChild(loader);
 }
 function removeLoader() {
@@ -26,7 +21,7 @@ function removeLoader() {
 function fetchData() {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			resolve(fetch('./js/json/task17.json'));
+			resolve(fetch('./data.json'));
 		}, 3000);
 	});
 }
@@ -46,11 +41,46 @@ async function getData() {
 	}
 }
 
+function displayImage(id) {
+	console.log('called');
+	console.log('id', id);
+	currentImage = id;
+	imagesArr[currentImage].classList.add('is-shown');
+
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+}
+
+function displayImageAuto(id) {
+	currentImage = id;
+
+	if (currentImage !== 0) {
+		imagesArr[currentImage - 1].classList.remove('is-shown');
+	} else if (currentImage === 0) {
+		imagesArr[4].classList.remove('is-shown');
+	}
+
+	imagesArr[currentImage].classList.add('is-shown');
+
+	if (currentImage === 4) {
+		nextBtn.disabled = true;
+		prevBtn.disabled = false;
+	} else if (currentImage === 0) {
+		prevBtn.disabled = true;
+		nextBtn.disabled = false;
+	} else {
+		prevBtn.disabled = false;
+		nextBtn.disabled = false;
+	}
+
+	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+}
+
 function displayPrevImage() {
 	imagesArr[currentImage].classList.remove('is-shown');
 	currentImage--;
 	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+	console.log('currentImage displayPrevImage', currentImage);
 }
 
 function displayNextImage() {
@@ -58,6 +88,14 @@ function displayNextImage() {
 	currentImage++;
 	imagesArr[currentImage].classList.add('is-shown');
 	page.innerHTML = `${currentImage + 1} / ${imagesArr.length}`;
+	console.log('currentImage displayNextImage', currentImage);
+}
+
+function slideImages() {
+	imagesArr[currentImage].classList.remove('is-shown');
+	currentImage++;
+	imagesArr[currentImage].classList.add('is-shown');
+	console.log('currentImage slideImages', currentImage);
 }
 
 function createPrevButton() {
@@ -102,6 +140,18 @@ nextBtn.addEventListener('click', function () {
 	}
 });
 
+function createDots(numOfImages) {
+	const fragment = document.createDocumentFragment();
+
+	for (let i = 0; i < numOfImages; i++) {
+		let dot = document.createElement('li');
+		dot.classList.add('slide__dot__item');
+		fragment.appendChild(dot);
+	}
+
+	dotContainer.appendChild(fragment);
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
 	const data = await getData();
 	const fragment = document.createDocumentFragment();
@@ -114,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 		li.appendChild(image);
 		imagesArr.push(li);
 
-		li.classList.add('slide-images');
+		li.classList.add('slide__list__item');
 
 		if (index === 0) {
 			li.classList.add('is-shown');
@@ -123,5 +173,46 @@ document.addEventListener('DOMContentLoaded', async function () {
 	});
 
 	ul.appendChild(fragment);
+
+	createDots(data.length);
+
+	const dots = document.querySelectorAll('.slide__dot__item');
+
+	dots.forEach((dot, index) => {
+		dot.addEventListener('click', function () {
+			let img = document.querySelector('.is-shown');
+			img.classList.remove('is-shown');
+
+			if (index === 4) {
+				nextBtn.disabled = true;
+				prevBtn.disabled = false;
+			} else if (index === 0) {
+				prevBtn.disabled = true;
+				nextBtn.disabled = false;
+			} else {
+				prevBtn.disabled = false;
+				nextBtn.disabled = false;
+			}
+
+			displayImage(index);
+		});
+	});
+
+	// setTimeout(displayImage(currentImage), 3000);
+
+	function yourFunction() {
+		// do whatever you like here
+
+		displayImageAuto(currentImage);
+		currentImage++;
+
+		setTimeout(yourFunction, 1000);
+
+		if (currentImage === 5) currentImage = 0;
+		console.log('currentImage', currentImage);
+	}
+
+	yourFunction();
+
 	page.textContent = `${currentImage + 1} / ${imagesArr.length}`;
 });
